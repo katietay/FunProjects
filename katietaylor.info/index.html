@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="A homepage for Katie's portfolio project">
+    <meta name="keywords" content="HTML, CSS, JavaScript, portfolio">
+    <meta name="author" content="Katie Taylor">
+    <title>Katie's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="nav-bar">
+            <input id="menu-toggler" type="checkbox" class="menu-toggler">
+            <label for="menu-toggler" class="show-menu">
+                <span></span>
+            </label>
+            <nav class="nav">
+                <ul class="nav__menu">
+                    <li class="nav__item"><a href="index.html" class="nav__link active">home</a></li>
+                    <li class="nav__item"><a href="about.html" class="nav__link">about</a></li>
+                    <li class="nav__item"><a href="projects.html" class="nav__link">projects</a></li>
+                    <li class="nav__item"><a href="work-history.html" class="nav__link">work history</a></li>
+                    <li class="nav__item"><a href="writing-sample.html" class="nav__link">writing sample</a></li>
+                    <li class="nav__item"><a href="demo.html" class="nav__link">demo</a></li>
+                    <li class="nav__item"><a href="contact.html" class="nav__link">contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 id="typed-text"></h1>
+            <p id="fade-in-text">Web Developer | UX Enthusiast</p>
+            <div class="hero-buttons">
+                <a href="https://github.com/katietay" class="btn fade-in-btn" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/katherinetaylor24/" class="btn fade-in-btn" target="_blank">LinkedIn</a>
+                <a href="/media/resume.pdf" class="btn fade-in-btn" target="_blank">Resume</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="/media/headshot.jpg" alt="Katie Taylor Headshot">
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <section class="content">
+        <div>
+            <img src="/media/csu.jpg" alt="a lush lilac bush in full bloom on CSUs campus" width =300px>
+        </div>
+        <div class="text-content">
+            <h2>My Professional Mission</h2>
+            <p>I am dedicated to creating inclusive, human-centered digital experiences that empower individuals and foster meaningful connections. With a passion for accessibility, responsive technologies, and innovative problem-solving, I strive to design and develop solutions that bridge gaps, promote equity, and enhance usability for all. Through creativity, empathy, and adaptability, I aim to make technology a tool for positive change—ensuring that digital spaces are accessible, engaging, and impactful.</p>
+            <div class="content-btn">
+                <button class="btn">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Katie Taylor</p>
+    </footer>
+
+    <!-- JavaScript for Typing, Bouncing Period, and Animations -->
+    <script>
+   	document.addEventListener("DOMContentLoaded", function () {
+    if (window.location.pathname.includes("index.html") || window.location.pathname === "/") {
+        const titleText = "Hi, I'm Katie."; 
+        let index = 0;
+        const typingSpeed = 90;
+        const fadeInDelay = 900;
+        const buttonAnimationDelay = 800;
+        const typedTextElement = document.getElementById("typed-text");
+        const fadeInTextElement = document.getElementById("fade-in-text");
+        const buttons = document.querySelectorAll(".fade-in-btn");
+
+        function typeWriter() {
+            if (index < titleText.length - 1) {
+                typedTextElement.innerHTML += titleText.charAt(index);
+                index++;
+                setTimeout(typeWriter, typingSpeed);
+            } else if (index === titleText.length - 1) {
+                // Append the period as a span for animation
+                const periodSpan = document.createElement("span");
+                periodSpan.id = "bouncing-period";
+                periodSpan.innerHTML = titleText.charAt(index); // The period
+                typedTextElement.appendChild(periodSpan); // Append it to the element
+
+                index++;
+
+                const periodElement = document.getElementById("bouncing-period");
+                periodElement.classList.add("bounce");
+
+                // Fade in the second line **halfway through bounce**
+                setTimeout(() => {
+                    fadeInTextElement.style.opacity = "1";
+                    fadeInTextElement.style.transform = "translateY(0)";
+                }, fadeInDelay);
+
+                // Animate buttons after text fades in
+                setTimeout(() => {
+                    buttons.forEach((button, i) => {
+                        setTimeout(() => {
+                            button.classList.add("show");
+                        }, i * 300);
+                    });
+                }, fadeInDelay + buttonAnimationDelay);
+            }
+        }
+
+        typeWriter();
+    } else {
+        // On other pages, just fade in the text normally
+        const fadeInTextElement = document.getElementById("fade-in-text");
+        if (fadeInTextElement) {
+            fadeInTextElement.style.opacity = "1";
+            fadeInTextElement.style.transform = "translateY(0)";
+        }
+    }
+});
+
+    </script>
+</body>
+</html>
