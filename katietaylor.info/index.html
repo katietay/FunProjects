@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
+    
     <!-- Navigation -->
     <header>
         <div class="nav-bar">
@@ -70,61 +70,61 @@
 
     <!-- JavaScript for Typing, Bouncing Period, and Animations -->
     <script>
-   	document.addEventListener("DOMContentLoaded", function () {
-    if (window.location.pathname.includes("index.html") || window.location.pathname === "/") {
-        const titleText = "Hi, I'm Katie."; 
-        let index = 0;
-        const typingSpeed = 90;
-        const fadeInDelay = 900;
-        const buttonAnimationDelay = 800;
-        const typedTextElement = document.getElementById("typed-text");
-        const fadeInTextElement = document.getElementById("fade-in-text");
-        const buttons = document.querySelectorAll(".fade-in-btn");
+            document.addEventListener("DOMContentLoaded", function () {
+            if (window.location.pathname.includes("index.html") || window.location.pathname === "/") {
+                const titleText = "Hi, I'm Katie."; 
+                let index = 0;
+                const typingSpeed = 90;
+                const fadeInDelay = 900;
+                const buttonAnimationDelay = 800;
+                const typedTextElement = document.getElementById("typed-text");
+                const fadeInTextElement = document.getElementById("fade-in-text");
+                const buttons = document.querySelectorAll(".fade-in-btn");
 
-        function typeWriter() {
-            if (index < titleText.length - 1) {
-                typedTextElement.innerHTML += titleText.charAt(index);
-                index++;
-                setTimeout(typeWriter, typingSpeed);
-            } else if (index === titleText.length - 1) {
-                // Append the period as a span for animation
-                const periodSpan = document.createElement("span");
-                periodSpan.id = "bouncing-period";
-                periodSpan.innerHTML = titleText.charAt(index); // The period
-                typedTextElement.appendChild(periodSpan); // Append it to the element
+                function typeWriter() {
+                    if (index < titleText.length - 1) {
+                        typedTextElement.innerHTML += titleText.charAt(index);
+                        index++;
+                        setTimeout(typeWriter, typingSpeed);
+                    } else if (index === titleText.length - 1) {
+                        // Append the period as a span for animation
+                        const periodSpan = document.createElement("span");
+                        periodSpan.id = "bouncing-period";
+                        periodSpan.innerHTML = titleText.charAt(index); // The period
+                        typedTextElement.appendChild(periodSpan); // Append it to the element
 
-                index++;
+                        index++;
 
-                const periodElement = document.getElementById("bouncing-period");
-                periodElement.classList.add("bounce");
+                        const periodElement = document.getElementById("bouncing-period");
+                        periodElement.classList.add("bounce");
 
-                // Fade in the second line **halfway through bounce**
-                setTimeout(() => {
+                        // Fade in the second line **halfway through bounce**
+                        setTimeout(() => {
+                            fadeInTextElement.style.opacity = "1";
+                            fadeInTextElement.style.transform = "translateY(0)";
+                        }, fadeInDelay);
+
+                        // Animate buttons after text fades in
+                        setTimeout(() => {
+                            buttons.forEach((button, i) => {
+                                setTimeout(() => {
+                                    button.classList.add("show");
+                                }, i * 300);
+                            });
+                        }, fadeInDelay + buttonAnimationDelay);
+                    }
+                }
+
+                typeWriter();
+            } else {
+                // On other pages, just fade in the text normally
+                const fadeInTextElement = document.getElementById("fade-in-text");
+                if (fadeInTextElement) {
                     fadeInTextElement.style.opacity = "1";
                     fadeInTextElement.style.transform = "translateY(0)";
-                }, fadeInDelay);
-
-                // Animate buttons after text fades in
-                setTimeout(() => {
-                    buttons.forEach((button, i) => {
-                        setTimeout(() => {
-                            button.classList.add("show");
-                        }, i * 300);
-                    });
-                }, fadeInDelay + buttonAnimationDelay);
+                }
             }
-        }
-
-        typeWriter();
-    } else {
-        // On other pages, just fade in the text normally
-        const fadeInTextElement = document.getElementById("fade-in-text");
-        if (fadeInTextElement) {
-            fadeInTextElement.style.opacity = "1";
-            fadeInTextElement.style.transform = "translateY(0)";
-        }
-    }
-});
+        });
 
     </script>
 </body>
